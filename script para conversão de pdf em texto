@@ -1,0 +1,20 @@
+#instalando bibliotecas
+# install.packages("tesseract")
+# install.packages("pdftools")
+
+#ativando bibliotecas
+library(tesseract)
+library(pdftools)
+
+#tesseract_download("por") #donwload de matrix de treinamento para lingua portuguesas (basta rodar uma vez)
+
+imagens <- pdf_convert("C:/Users/conta/Downloads/codigo de conduta dos agentes publicos e estudantes da ufrn.pdf", dpi = 600)
+
+# Definir o idioma para OCR (Português)
+tesseract_lang <- tesseract("por")
+
+# Extrair texto das imagens
+texto <- sapply(imagens, ocr, engine = tesseract_lang)
+
+# Mostrar resultado
+cat(texto, sep = "\n")
